@@ -7,6 +7,12 @@ Rails.application.routes.draw do
   mount Rswag::Ui::Engine => "/api-docs"
   mount Rswag::Api::Engine => "/api-docs"
 
+  namespace :auths do
+    post :login
+    post :logout
+    get :me
+  end
+
   # Defines the root path route ("/")
   # root "posts#index"
 end

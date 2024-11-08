@@ -118,6 +118,8 @@ GEM
     factory_bot_rails (4.11.1)
       factory_bot (~> 4.11.1)
       railties (>= 3.0.0)
+    faker (3.5.1)
+      i18n (>= 1.8.11, < 2)
     globalid (1.2.1)
       activesupport (>= 6.1)
     http-accept (1.7.0)
@@ -323,6 +325,7 @@ DEPENDENCIES
   debug
   delayed_job_active_record (~> 4.1)
   factory_bot_rails (~> 4.0)
+  faker (~> 3.5)
   kaminari (~> 1.2)
   pg (~> 1.1)
   puma (>= 5.0)
