@@ -1,0 +1,61 @@
+---
+swagger: '2.0'
+info:
+  title: API V1
+  version: v1
+securityDefinitions:
+  Bearer:
+    description: "..."
+    type: apiKey
+    name: Authorization
+    in: header
+paths:
+  "/auths/login":
+    post:
+      summary: Login
+      tags:
+      - Authentications API
+      description: |-
+        Login with given username and password,
+                    after Login copy the Token and place in Authorize Form without prefix
+      parameters:
+      - name: username
+        in: query
+        type: string
+      - name: password
+        in: query
+        type: string
+      responses:
+        '200':
+          description: Login Success
+        '401':
+          description: Login Failed Wrong Username
+  "/auths/logout":
+    post:
+      summary: Logout
+      tags:
+      - Authentications API
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: Logout Success
+        '401':
+          description: Wrong Token
+  "/auths/me":
+    get:
+      summary: Get Entity Detail
+      tags:
+      - Authentications API
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: Success Get Entity Detail
+        '401':
+          description: Wrong Token
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com

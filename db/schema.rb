@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_08_004307) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_08_103244) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,5 +27,27 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_08_004307) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "entities", force: :cascade do |t|
+    t.string "name"
+    t.string "type"
+    t.bigint "parent_id"
+    t.string "password_digest"
+    t.string "username"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_entities_on_parent_id"
+    t.index ["type"], name: "index_entities_on_type"
+    t.index ["username"], name: "index_entities_on_username", unique: true
+  end
+
+  create_table "entity_tokens", force: :cascade do |t|
+    t.string "token"
+    t.datetime "expired_at"
+    t.bigint "entity_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["entity_id"], name: "index_entity_tokens_on_entity_id"
   end
 end
