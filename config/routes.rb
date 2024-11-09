@@ -13,6 +13,32 @@ Rails.application.routes.draw do
     get :me
   end
 
+  namespace :api do
+    resource :users, only: :show do
+      collection do
+        post :deposit
+        post :transfer
+        post :withdraw
+      end
+    end
+    resource :teams, only: :show do
+      collection do
+        post :deposit
+        post :transfer
+        post :withdraw
+      end
+    end
+    resource :stocks, only: :show do
+      collection do
+        post :deposit
+        post :transfer
+        post :withdraw
+      end
+    end
+  end
+
+  resources :entities, only: :index
+
   # Defines the root path route ("/")
   # root "posts#index"
 end

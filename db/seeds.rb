@@ -1,10 +1,11 @@
-if Entity.count.zero?
+if User.count.zero?
   10.times do
-    Entity.create({
+    User.create({
                      name: Faker::Name.name,
                      username: Faker::Internet.user_name,
-                     password: Faker::Internet.password
+                     password: Faker::Internet.password,
+                     pin: '123456'
                    })
   end
-  Entity.create({ name: 'Demo User', username: 'demo_user', password: 'password' })
+  User.create({ name: 'Demo User', username: 'demo_user', password: 'password',  pin: '123456' })
 end
