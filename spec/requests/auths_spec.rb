@@ -12,7 +12,7 @@ RSpec.describe 'Auths API', type: :request do
       parameter name: :password, in: :query, type: :string
 
       response(200, 'Login Success') do
-        before { Entity.create(name: 'Valid', username: 'valid', password: 'valid') }
+        before { Entity.create(name: 'Valid', username: 'valid', password: 'valid', pin: '123456') }
         let(:username) { 'valid' }
         let(:password) { 'valid' }
 

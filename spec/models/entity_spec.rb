@@ -4,8 +4,16 @@ RSpec.describe Entity, type: :model do
   subject do
     described_class.new(name: "Nama Orang",
                         username: "orang",
-                        password: "akuimut")
+                        password: "akuimut",
+                        pin: "123456")
   end
+
+  let(:entity1) { Entity.new(
+    name: Faker::Name.name,
+    username: 'orang1',
+    password: 'akuimut',
+    pin: '123456'
+  )}
 
   it 'Valid with valid attributes' do
     expect(subject).to be_valid
@@ -21,19 +29,52 @@ RSpec.describe Entity, type: :model do
     expect(new_subject).to_not be_valid
   end
 
-  it 'Will be Authencate with correct username and password' do
+  it 'Will be Authenticate with correct username and password' do
     subject.save
-    username = "orang"
     password = "akuimut"
 
-    entity = Entity.find_by_username(username)
-
-    expect(entity.authenticate(password)).to be_truthy
+    expect(subject.authenticate(password)).to be_truthy
   end
 
   it 'can generate entity token' do
     subject.save
     token = subject.generate_token
     expect(token).to be_valid
+  end
+
+  it 'can deposit money' do
+    subject.save
+    subject.deposit({ amount: 10 })
+    expect(subject.current_balance).to eq(10)
+  end
+
+  it 'can transfer money' do
+    subject.save
+    entity1.save
+    entity1.deposit({ amount: 10 })
+    entity1.transfer({ amount: 5, entity_id: subject.id })
+    expect(subject.current_balance).to eq(5)
+    expect(entity1.current_balance).to eq(5)
+  end
+
+  it "can't transfer money when balance not enough" do
+    subject.save
+    entity1.save
+    entity1.deposit({ amount: 10 })
+    expect { entity1.transfer({ amount: 15, entity_id: subject.id }) }
+      .to raise_error(StandardError)
+  end
+
+  it 'can withdraw money' do
+    subject.save
+    subject.deposit({ amount: 10 })
+    expect(subject.withdraw({ amount: 5 })).to be_valid
+  end
+
+  it "can't withdraw money if balance not enough" do
+    entity1.save
+    entity1.deposit({ amount: 5 })
+    expect { entity1.withdraw({ amount: 15 }) }
+      .to raise_error(StandardError)
   end
 end
