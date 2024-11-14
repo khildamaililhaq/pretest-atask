@@ -58,3 +58,4 @@ group :development, :test do
 end
 
 gem "faker", "~> 3.5"
+gem "latest_stock_price", path: "lib/latest_stock_price"

@@ -1,3 +1,8 @@
+PATH
+  remote: lib/latest_stock_price
+  specs:
+    latest_stock_price (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -327,6 +332,7 @@ DEPENDENCIES
   factory_bot_rails (~> 4.0)
   faker (~> 3.5)
   kaminari (~> 1.2)
+  latest_stock_price!
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.2.2)

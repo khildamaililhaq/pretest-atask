@@ -10,7 +10,7 @@ class Entity < ApplicationRecord
   attribute :password
   attribute :pin
 
-  validates :pin, format: { with: /\A\d+\Z/ }, length: { is: 6 }
+  validates :pin, format: { with: /\A\d+\Z/ }, length: { is: 6 }, allow_nil: true
 
   validates_presence_of :name, :username, :password, on: :create
   validates_uniqueness_of :username
@@ -90,7 +90,7 @@ class Entity < ApplicationRecord
   end
 
   def encrypt_pin
-    return unless password.present?
+    return unless pin.present?
 
     self.pin_digest = crypt pin
   end

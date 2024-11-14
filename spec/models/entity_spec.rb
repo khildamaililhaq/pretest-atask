@@ -15,8 +15,25 @@ RSpec.describe Entity, type: :model do
     pin: '123456'
   )}
 
+  let(:entity_without_pin) { Entity.new(
+    name: Faker::Name.name,
+    username: Faker::Internet.username,
+    password: Faker::Internet.password,
+  ) }
+
   it 'Valid with valid attributes' do
-    expect(subject).to be_valid
+    expect(subject.save).to be_truthy
+  end
+
+  it 'Valid without pin' do
+    expect(entity_without_pin.save).to be_truthy
+  end
+
+  it 'Can update pin with numeric minimum six characters' do
+    entity_without_pin.save
+    expect(entity_without_pin.update(pin: '123456')).to be_truthy
+    expect(entity_without_pin.update(pin: '12222')).to be_falsey
+    expect(entity_without_pin.update(pin: '11112a')).to be_falsey
   end
 
   it 'Invalid with duplicate username' do

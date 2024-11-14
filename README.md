@@ -54,8 +54,24 @@ export DOCKER_WEB_VOLUME=.:/app
 ```
 - Open Project Directory from terminal, and type ```docker compose up --build```
 - In another terminal type ```./run rails db:prepare``` to setup postgresql database
+- In another terminal type ```./run rails db:seed``` to seed predefined data
 - To see the API documentation you can go to the ```{yourAppURL}/api-docs```
 
 ### Note:
 - Every command in terminal to access docker container must be specify with ```./run {your command}```
 - Type ```./run``` to see available command
+
+### Account for Documentation Test:
+- User -> username: demo_user, password: password, pin: 123456
+- Team -> username: demo_team, password: password, pin: 123456
+- Stock -> username: FUSION, password: FUSION, pin: 123456
+
+### Rake tasks
+From local Gem ```latest_stock_price``` is provided some rake tasks, don't forget to use ```./run``` prefix for
+every command
+- ```rake stock_price:get_price[//your stock identifier string//]``` to see specific stock price detail
+- ```rake stock_price:get_prices[//your stock identifiers separated with comma//]``` to see multiple stock price detail
+- ```rake stock_price:get_all``` to see all available stock price
+
+From rails app
+- ```rake stock_price:update_all``` to update all stock price
