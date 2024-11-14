@@ -33,7 +33,7 @@ gem "rest-client", "~> 2.1"
 
 gem "active_model_serializers", "~> 0.10.14"
 
-gem "rswag", "~> 2.15"
+gem "rswag", "~> 2.16"
 
 gem "kaminari", "~> 1.2"
 
