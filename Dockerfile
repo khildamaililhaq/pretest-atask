@@ -15,6 +15,7 @@ RUN bash -c "set -o pipefail && apt-get update \
 USER ruby
 
 COPY --chown=ruby:ruby Gemfile* ./
+COPY --chown=ruby:ruby lib /app/lib
 RUN bundle install
 
 ARG RAILS_ENV="production"

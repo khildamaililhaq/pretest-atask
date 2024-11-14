@@ -198,7 +198,7 @@ RSpec.describe "Api::Teams", type: :request do
                       type: :object,
                       properties: {
                         amount: { type: :integer },
-                        pin: { type: :string }
+                        pin: { type: :string, description: 'PIN is six digit numeric' }
                       }
                     }
                   }

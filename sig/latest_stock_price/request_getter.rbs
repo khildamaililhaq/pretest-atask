@@ -1,0 +1,5 @@
+module LatestStockPrice
+  class RequestGetter
+    @api_url: untyped
+  end
+end

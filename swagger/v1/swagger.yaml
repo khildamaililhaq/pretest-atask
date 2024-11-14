@@ -219,6 +219,7 @@ paths:
                   type: integer
                 pin:
                   type: string
+                  description: PIN is six digit numeric
       responses:
         '200':
           description: Withdraw Success
