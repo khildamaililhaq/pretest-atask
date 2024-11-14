@@ -1,9 +1,50 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+user_detail_faker = {
+  email: Faker::Internet.email,
+  phone_number: Faker::PhoneNumber.cell_phone,
+  birthdate: Faker::Date.birthday,
+  birthplace: Faker::Address.city,
+  address: Faker::Address.street_address
+}
+
+team_detail_faker = {
+  code: Faker::Code.ean,
+  email: Faker::Internet.email
+}
+
+if User.count.zero?
+  10.times do
+    User.create({
+                     name: Faker::Name.name,
+                     username: Faker::Internet.user_name,
+                     password: Faker::Internet.password,
+                     pin: '123456',
+                     user_detail_attributes: user_detail_faker
+                   })
+  end
+  User.create({
+                name: 'Demo User',
+                username: 'demo_user',
+                password: 'password',
+                pin: '123456',
+                user_detail_attributes: user_detail_faker })
+end
+
+if Team.count.zero?
+  10.times do
+    Team.create({
+                  name: Faker::Name.name,
+                  username: Faker::Internet.user_name,
+                  password: Faker::Internet.password,
+                  pin: '123456',
+                  team_detail_attributes: team_detail_faker
+                })
+  end
+  Team.create({
+                name: 'Demo Team',
+                username: 'demo_team',
+                password: 'password',
+                pin: '123456',
+                team_detail_attributes: team_detail_faker })
+end
+
+GetStockPriceService.new.update_stocks

@@ -1,0 +1,402 @@
+---
+swagger: '2.0'
+info:
+  title: API V1
+  version: v1
+securityDefinitions:
+  Bearer:
+    description: "..."
+    type: apiKey
+    name: Authorization
+    in: header
+paths:
+  "/api/stocks":
+    get:
+      summary: Show Stock Detail
+      tags:
+      - Stocks Api
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: Success Response
+        '401':
+          description: Login Failed Wrong Token
+  "/api/stocks/transfer":
+    post:
+      summary: Transfer money to another Entity
+      tags:
+      - Stocks Api
+      consumes:
+      - application/json
+      security:
+      - Bearer: {}
+      parameters:
+      - name: wallet_transaction
+        description: Detail Wallet Transaction
+        in: body
+        schema:
+          type: object
+          properties:
+            wallet_transaction:
+              type: object
+              properties:
+                entity_id:
+                  type: integer
+                amount:
+                  type: integer
+                pin:
+                  type: string
+      responses:
+        '200':
+          description: Transfer Success
+        '422':
+          description: Insufficient Balance
+        '412':
+          description: Precondition Failed, Params Missing of Wrong
+        '404':
+          description: Precondition Failed, Destination Entity Didnt exist
+        '401':
+          description: Login Failed Wrong Token
+  "/api/stocks/deposit":
+    post:
+      summary: Deposit Money to current account
+      consumes:
+      - application/json
+      tags:
+      - Stocks Api
+      security:
+      - Bearer: {}
+      parameters:
+      - name: wallet_transaction
+        description: Detail Wallet Transaction
+        in: body
+        schema:
+          type: object
+          properties:
+            wallet_transaction:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                pin:
+                  type: string
+      responses:
+        '200':
+          description: Transfer Success
+        '401':
+          description: Login Failed Wrong Token
+        '412':
+          description: Precondition failed, amount minus
+  "/api/stocks/withdraw":
+    post:
+      summary: Withdraw Money to current account
+      consumes:
+      - application/json
+      tags:
+      - Stocks Api
+      security:
+      - Bearer: {}
+      parameters:
+      - name: wallet_transaction
+        description: Detail Wallet Transaction
+        in: body
+        schema:
+          type: object
+          properties:
+            wallet_transaction:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                pin:
+                  type: string
+      responses:
+        '200':
+          description: Withdraw Success
+        '401':
+          description: Withdraw Failed Wrong PIN
+        '412':
+          description: Precondition failed, amount minus, Withdraw Failed
+  "/api/teams":
+    get:
+      summary: Show Team Detail
+      tags:
+      - Teams Api
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: Success Response
+        '401':
+          description: Login Failed Wrong Token
+  "/api/teams/transfer":
+    post:
+      summary: Transfer Money to other Entity
+      tags:
+      - Teams Api
+      consumes:
+      - application/json
+      security:
+      - Bearer: {}
+      parameters:
+      - name: wallet_transaction
+        description: Detail Wallet Transaction
+        in: body
+        schema:
+          type: object
+          properties:
+            wallet_transaction:
+              type: object
+              properties:
+                entity_id:
+                  type: integer
+                amount:
+                  type: integer
+                pin:
+                  type: string
+      responses:
+        '200':
+          description: Transfer Success
+        '422':
+          description: Insufficient Balance
+        '412':
+          description: Precondition Failed, Params Missing of Wrong
+        '404':
+          description: Precondition Failed, Destination Entity Didnt exist
+        '401':
+          description: Login Failed Wrong Token
+  "/api/teams/deposit":
+    post:
+      summary: Deposit Money to current Entity
+      consumes:
+      - application/json
+      tags:
+      - Teams Api
+      security:
+      - Bearer: {}
+      parameters:
+      - name: wallet_transaction
+        description: Detail Wallet Transaction
+        in: body
+        schema:
+          type: object
+          properties:
+            wallet_transaction:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                pin:
+                  type: string
+      responses:
+        '200':
+          description: Transfer Success
+        '401':
+          description: Login Failed Wrong Token
+        '412':
+          description: Precondition failed, amount minus
+  "/api/teams/withdraw":
+    post:
+      summary: Withdraw Money to current account
+      consumes:
+      - application/json
+      tags:
+      - Teams Api
+      security:
+      - Bearer: {}
+      parameters:
+      - name: wallet_transaction
+        description: Detail Wallet Transaction
+        in: body
+        schema:
+          type: object
+          properties:
+            wallet_transaction:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                pin:
+                  type: string
+                  description: PIN is six digit numeric
+      responses:
+        '200':
+          description: Withdraw Success
+        '401':
+          description: Withdraw Failed Wrong PIN
+        '412':
+          description: Precondition failed, amount minus, Withdraw Failed
+  "/api/users":
+    get:
+      summary: Show User Detail
+      tags:
+      - Users Api
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: Success Response
+        '401':
+          description: Login Failed Wrong Token
+  "/api/users/transfer":
+    post:
+      summary: Transfer money to other entity
+      tags:
+      - Users Api
+      consumes:
+      - application/json
+      security:
+      - Bearer: {}
+      parameters:
+      - name: wallet_transaction
+        description: Detail Wallet Transaction
+        in: body
+        schema:
+          type: object
+          properties:
+            wallet_transaction:
+              type: object
+              properties:
+                entity_id:
+                  type: integer
+                amount:
+                  type: integer
+                pin:
+                  type: string
+      responses:
+        '200':
+          description: Transfer Success
+        '422':
+          description: Insufficient Balance
+        '412':
+          description: Precondition Failed, Params Missing of Wrong
+        '404':
+          description: Precondition Failed, Destination Entity Didnt exist
+        '401':
+          description: Login Failed Wrong PIN
+  "/api/users/deposit":
+    post:
+      summary: Deposit money to current account
+      consumes:
+      - application/json
+      tags:
+      - Users Api
+      security:
+      - Bearer: {}
+      parameters:
+      - name: wallet_transaction
+        description: Detail Wallet Transaction
+        in: body
+        schema:
+          type: object
+          properties:
+            wallet_transaction:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                pin:
+                  type: string
+      responses:
+        '200':
+          description: Deposit Success
+        '401':
+          description: Login Failed Wrong PIN
+        '412':
+          description: Precondition failed, amount minus
+  "/api/users/withdraw":
+    post:
+      summary: Withdraw Money to current account
+      consumes:
+      - application/json
+      tags:
+      - Users Api
+      security:
+      - Bearer: {}
+      parameters:
+      - name: wallet_transaction
+        description: Detail Wallet Transaction
+        in: body
+        schema:
+          type: object
+          properties:
+            wallet_transaction:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                pin:
+                  type: string
+      responses:
+        '200':
+          description: Withdraw Success
+        '401':
+          description: Withdraw Failed Wrong PIN
+        '412':
+          description: Precondition failed, amount minus, Withdraw Failed
+  "/auths/login":
+    post:
+      summary: Login
+      tags:
+      - Authentications API
+      description: |-
+        Login with given username and password,
+                    after Login copy the Token and place in Authorize Form without prefix
+      parameters:
+      - name: username
+        in: query
+        type: string
+      - name: password
+        in: query
+        type: string
+      responses:
+        '200':
+          description: Login Success
+        '401':
+          description: Login Failed Wrong Username
+  "/auths/logout":
+    post:
+      summary: Logout
+      tags:
+      - Authentications API
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: Logout Success
+        '401':
+          description: Wrong Token
+  "/auths/me":
+    get:
+      summary: Get Entity Detail
+      tags:
+      - Authentications API
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: Success Get Entity Detail
+        '401':
+          description: Wrong Token
+  "/entities":
+    get:
+      summary: Get Index for Entity
+      tags:
+      - Entities Api
+      parameters:
+      - name: name
+        in: query
+        type: string
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: Search name
+        '401':
+          description: Login Failed Wrong Token
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com
