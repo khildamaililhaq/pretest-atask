@@ -31,7 +31,7 @@ gem "daemons", "~> 1.4"
 
 gem "rest-client", "~> 2.1"
 
-gem "active_model_serializers", "~> 0.10.14"
+gem "active_model_serializers", "~> 0.10.15"
 
 gem "rswag", "~> 2.15"
 
